@@ -36,9 +36,5 @@ int main()
   }
 
   savebmp("img.bmp", width, height, dpi, pixeles);*/
-  Vector3D v1 = Vector3D(3,3,3);
-  Vector3D v2 = Vector3D(4,5,6);
-  Vector3D result = v1 ^ v2;
-  cout << result.x << " " << result.y << " " << result.z << endl;
   return 0;
 }
