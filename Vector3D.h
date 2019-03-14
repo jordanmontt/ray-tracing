@@ -1,5 +1,8 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
+#include <iostream>
+using namespace std;
+
 class Vector3D
 {
 public:
@@ -17,5 +20,6 @@ public:
   Vector3D operator*(double number) const;
   double operator*(const Vector3D &v) const;
   Vector3D operator^(const Vector3D &v) const;
+  void show();
 };
 #endif

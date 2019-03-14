@@ -1,6 +1,7 @@
 #include "Utilitarios.h"
 #include <iostream>
 #include "Vector3D.h"
+#include "Point3D.h"
 
 using namespace std;
 
@@ -36,5 +37,7 @@ int main()
   }
 
   savebmp("img.bmp", width, height, dpi, pixeles);*/
+
+
   return 0;
 }

@@ -60,3 +60,8 @@ Vector3D Vector3D::operator^(const Vector3D &v) const
     double newZ = (this->x * v.y) - (v.x * this->y);
     return Vector3D(newX, newY, newZ);
 }
+
+void Vector3D::show()
+{
+    cout << "<" << x << ", " << y << ", " << z << ">" << endl;
+}
