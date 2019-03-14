@@ -17,6 +17,7 @@ public:
   ~Point3D();
   Vector3D operator-(const Point3D &p) const;
   Point3D operator+(const Vector3D &v) const;
+  Point3D operator+(const Point3D &p) const;
   Point3D operator-(const Vector3D &v) const;
   Point3D operator*(const double n) const;
   friend Point3D operator*(double n, const Point3D &p);
