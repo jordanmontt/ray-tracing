@@ -24,6 +24,14 @@ Vector3D Vector3D::operator+(const Vector3D &v) const
     return Vector3D(newX, newY, newZ);
 }
 
+// Point3D Vector3D::operator+(const Point3D &p) const
+// {
+//     double newX = this->x + p.x;
+//     double newY = this->y + p.y;
+//     double newZ = this->z + p.z;
+//     return Point3D(newX, newY, newZ);
+// }
+
 Vector3D Vector3D::operator-(const Vector3D &v) const
 {
     double newX = this->x - v.x;

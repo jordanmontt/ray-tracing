@@ -38,49 +38,5 @@ int main()
 
   savebmp("img.bmp", width, height, dpi, pixeles);*/
 
-  // //ejercicio 1
-  // int c = 6;
-  // Vector3D v = Vector3D(6, 9, 6);
-  // (v * c).show();
-
-  // //ejercicio 2
-  // Vector3D a = Vector3D(1, 1, 1);
-  // Vector3D b = Vector3D(2, 3, 4);
-  // cout << a * b << endl;
-
-  // //ejercicio 3
-  // Vector3D vec = Vector3D(6, 6, 6);
-  // int n = 3;
-  // (vec / n).show();
-
-  // //ejercicio 4
-  // Vector3D v1 = Vector3D(1, 1, 1);
-  // Vector3D v2 = Vector3D(2, 2, 2);
-  // (v1 + v2).show();
-  // (v1 - v2).show();
-
-  // //ejercicio 5
-  // Point3D p = Point3D(1, 2, 3);
-  // Vector3D vector = Vector3D(3, 3, 3);
-  // (p - v).show();
-
-  // //ejercicio 6
-  // Point3D p1 = Point3D(5, 4, 3);
-  // Point3D p2 = Point3D(2, 2, 2);
-  // (p1 - p2).show();
-
-  // //ejercicio 7
-  // Vector3D va = Vector3D(1, 1, 1);
-  // Vector3D vb = Vector3D(2, 3, 4);
-  // (a ^ b).show();
-
-  // //ejercicio 8
-  // Vector3D vec1 = Vector3D(1, 2, 3);
-  // Point3D pun1 = Point3D(1, 2, 3);
-  // (pun1 + vec1).show();
-
-  Point3D pun1 = Point3D(1, 2, 3);
-  Point3D pun2 = Point3D(1, 2, 3);
-  (pun1 + pun2).show();
   return 0;
 }
