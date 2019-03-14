@@ -1,17 +1,19 @@
 #include "Vector3D.h"
 
-Vector3D::Vector3D(double n)
-{
-    this->x = n;
-    this->y = n;
-    this->z = n;
-}
+Vector3D::Vector3D() : x(0), y(0), z(1) {}
 
-Vector3D::Vector3D(double x, double y, double z)
+Vector3D::Vector3D(const Vector3D &v) : x(v.x), y(v.y), z(v.z) {}
+
+Vector3D::Vector3D(double n) : x(n), y(n), z(n) {}
+
+Vector3D::Vector3D(double v_x, double v_y, double v_z) : x(v_x), y(v_y), z(v_z) {}
+
+Vector3D &Vector3D::operator=(const Vector3D &v)
 {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    x = v.x;
+    y = v.y;
+    z = v.z;
+    return *this;
 }
 
 Vector3D Vector3D::operator+(const Vector3D &v) const
