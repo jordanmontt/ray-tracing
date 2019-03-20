@@ -1,13 +1,15 @@
 #include "Utilitarios.h"
+#include "Ray.h"
+#include "Point3D.h"
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <vector>
 #include <cmath>
 #include <limits>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
 void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 {
 	FILE *f;
@@ -70,4 +72,27 @@ void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 		fwrite(color, 1, 3, f);
 	}
 	fclose(f);
+}
+
+ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObjects)
+{
+	ColorRGB color;
+	color.red = 0.0;
+	color.green = 0.0;
+	color.blue = 0.0;
+	double equationRoot;
+	double minEquationRoot = 2000000;
+	Vector3D normal;
+	Point3D q;
+	for (int i = 0; i < geometricObjects.size(); i++)
+	{
+		if (geometricObjects[i]->isImpact(ray, equationRoot, normal, q) && equationRoot < minEquationRoot)
+		{
+			color.red = geometricObjects[i]->getColor().red;
+			color.green = geometricObjects[i]->getColor().green;
+			color.blue = geometricObjects[i]->getColor().blue;
+			minEquationRoot = equationRoot;
+		}
+	}
+	return color;
 }

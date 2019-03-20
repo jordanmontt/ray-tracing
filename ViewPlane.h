@@ -6,5 +6,5 @@ class ViewPlane
     int verticalResolution;
   public:
     ViewPlane();
-    ViewPlane(int verticalResolution, int v_vrhorizontalResolutiones, double squareSize);
+    ViewPlane(int horizontalResolution, int verticalResolution, double squareSize);
 };

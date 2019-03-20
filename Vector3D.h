@@ -20,8 +20,10 @@ public:
   Vector3D operator-(const Vector3D &v) const;
   Vector3D operator/(double number) const;
   Vector3D operator*(double number) const;
+  friend Vector3D operator*(double number, const Vector3D &v);
   double operator*(const Vector3D &v) const;
   Vector3D operator^(const Vector3D &v) const;
+
   void show();
 };
 #endif
