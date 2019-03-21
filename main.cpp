@@ -4,6 +4,7 @@
 #include "Sphere.h"
 #include "GeometricObject.h"
 #include "ViewPlane.h"
+#include "Plane.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -13,7 +14,7 @@ Point3D randomCenter()
 {
   double x = (rand() % 748 + 1) - 374;
   double y = (rand() % 548 + 1) - 274;
-  double z = -400.0;
+  double z = (rand() % 400 + 1) - 400;
   Point3D p(x, y, z);
   return p;
 }
@@ -25,6 +26,14 @@ ColorRGB randomColor()
   color.green = (1.0) * ((double)rand() / (double)RAND_MAX);
   color.blue = (1.0) * ((double)rand() / (double)RAND_MAX);
   return color;
+}
+
+Vector3D randomVector()
+{
+  double x = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  double y = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  double z = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  return Vector3D(x, y, z);
 }
 
 void fillSpheres(Sphere *spheres, int numberOfSpheres)
@@ -41,13 +50,17 @@ int main()
 {
   srand(time(NULL));
   // ESCENA------------------------------------------------------------------
+  //ESFERAS
   vector<GeometricObject *> scene;
   int numberOfSpheres = 100;
   Sphere *spheres = new Sphere[numberOfSpheres];
   fillSpheres(spheres, numberOfSpheres);
   for (int i = 0; i < numberOfSpheres; i++)
     scene.push_back(&spheres[i]);
-
+  //PLANOS
+  Plane plane = Plane(randomVector(), randomCenter(), randomColor());
+  // Plane plane = Plane(Vector3D(0, 0, 1), Point3D(50, 50, -100), randomColor());
+  scene.push_back(&plane);
   // VIEWPLANE
   int horizontalResolution = 800;
   int verticalResolution = 600;
@@ -78,6 +91,6 @@ int main()
       pixeles[rows * width + cols].blue = getPixelColor(ray, scene).blue;
     }
   }
-  savebmp("img.bmp", width, height, dpi, pixeles);
+  savebmp("img4.bmp", width, height, dpi, pixeles);
   return 0;
 }

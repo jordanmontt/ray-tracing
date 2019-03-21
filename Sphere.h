@@ -14,7 +14,7 @@ public:
   Sphere(Point3D center, double radius);
   Sphere(Point3D center, double radius, ColorRGB color);
   ~Sphere();
-  bool isImpact(const Ray &r, double &t, Vector3D &n, Point3D &q) const;
+  bool isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Point3D &q) const;
   void setColor(double red, double green, double blue);
   ColorRGB getColor();
 };

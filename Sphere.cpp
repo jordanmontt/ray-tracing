@@ -16,12 +16,12 @@ Sphere::Sphere(Point3D center, double radius, ColorRGB color) : center(center), 
 
 Sphere::~Sphere() {}
 
-bool Sphere::isImpact(const Ray &rayo, double &minEquationRoot, Vector3D &n, Point3D &q) const
+bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Point3D &q) const
 {
     double equationRoot;
-    Vector3D originMinusCenter = rayo.origin - this->center;
-    double a = rayo.direction * rayo.direction;
-    double b = 2 * rayo.direction * originMinusCenter;
+    Vector3D originMinusCenter = ray.origin - this->center;
+    double a = ray.direction * ray.direction;
+    double b = 2 * ray.direction * originMinusCenter;
     double c = originMinusCenter * originMinusCenter - this->radius * this->radius;
     double discriminant = b * b - 4.0 * a * c;
     if (discriminant < 0.0)
@@ -33,8 +33,8 @@ bool Sphere::isImpact(const Ray &rayo, double &minEquationRoot, Vector3D &n, Poi
     equationRoot = (-b - discriminantEvaluation) / denominator;
     if (equationRoot > 0.000001)
     {
-        q = rayo.origin + equationRoot * rayo.direction;
-        n = (originMinusCenter + equationRoot * rayo.direction) / this->radius;
+        q = ray.origin + equationRoot * ray.direction;
+        n = (originMinusCenter + equationRoot * ray.direction) / this->radius;
         minEquationRoot = equationRoot;
         return true;
     }
@@ -42,8 +42,8 @@ bool Sphere::isImpact(const Ray &rayo, double &minEquationRoot, Vector3D &n, Poi
     equationRoot = (-b + discriminantEvaluation) / denominator;
     if (equationRoot > 0.000001)
     {
-        q = rayo.origin + equationRoot * rayo.direction;
-        n = (originMinusCenter + equationRoot * rayo.direction) / this->radius;
+        q = ray.origin + equationRoot * ray.direction;
+        n = (originMinusCenter + equationRoot * ray.direction) / this->radius;
         minEquationRoot = equationRoot;
         return true;
     }
