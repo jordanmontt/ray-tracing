@@ -2,6 +2,7 @@
 #include "Vector3D.h"
 #include "Point3D.h"
 #include "Sphere.h"
+#include "Triangle.h"
 #include "GeometricObject.h"
 #include "ViewPlane.h"
 #include "Plane.h"
@@ -51,16 +52,20 @@ int main()
   srand(time(NULL));
   // ESCENA------------------------------------------------------------------
   //ESFERAS
+  // vector<GeometricObject *> scene;
+  // int numberOfSpheres = 100;
+  // Sphere *spheres = new Sphere[numberOfSpheres];
+  // fillSpheres(spheres, numberOfSpheres);
+  // for (int i = 0; i < numberOfSpheres; i++)
+  //   scene.push_back(&spheres[i]);
+  // //PLANOS
+  // Plane plane = Plane(randomVector(), randomCenter(), randomColor());
+  // // Plane plane = Plane(Vector3D(0, 0, 1), Point3D(50, 50, -100), randomColor());
+  // scene.push_back(&plane);
+
   vector<GeometricObject *> scene;
-  int numberOfSpheres = 100;
-  Sphere *spheres = new Sphere[numberOfSpheres];
-  fillSpheres(spheres, numberOfSpheres);
-  for (int i = 0; i < numberOfSpheres; i++)
-    scene.push_back(&spheres[i]);
-  //PLANOS
-  Plane plane = Plane(randomVector(), randomCenter(), randomColor());
-  // Plane plane = Plane(Vector3D(0, 0, 1), Point3D(50, 50, -100), randomColor());
-  scene.push_back(&plane);
+  Triangle triangle = Triangle(randomCenter(), randomCenter(), randomCenter(), randomColor());
+  scene.push_back(&triangle);
   // VIEWPLANE
   int horizontalResolution = 800;
   int verticalResolution = 600;
@@ -91,6 +96,6 @@ int main()
       pixeles[rows * width + cols].blue = getPixelColor(ray, scene).blue;
     }
   }
-  savebmp("img4.bmp", width, height, dpi, pixeles);
+  savebmp("triangle.bmp", width, height, dpi, pixeles);
   return 0;
 }

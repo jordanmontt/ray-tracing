@@ -14,6 +14,7 @@ bool Plane::isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const
         return false;
     t = numerator / denominator;
     q = ray.origin + t * ray.direction;
+    n = this->normal;
     return true;
 }
 
