@@ -34,7 +34,7 @@ bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) cons
     tLine = determinantTLine / determinantDenominator;
     alpha = 1.0 - beta - gamma;
     q = alpha * this->a + beta * this->b + gamma * this->c;
-    if (beta > 0 && beta < 1 && gamma > 0 && gamma < 1 && (beta + gamma) > 0 && (beta + gamma) < 1)
+    if (beta > 0 && gamma > 0 && (beta + gamma) < 1)
         return true;
     return false;
 }

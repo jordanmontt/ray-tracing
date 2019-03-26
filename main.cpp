@@ -11,7 +11,7 @@
 #include <cstdlib>
 using namespace std;
 
-Point3D randomCenter()
+Point3D randomPoint()
 {
   double x = (rand() % 748 + 1) - 374;
   double y = (rand() % 548 + 1) - 274;
@@ -41,7 +41,7 @@ void fillSpheres(Sphere *spheres, int numberOfSpheres)
 {
   for (int i = 0; i < numberOfSpheres; i++)
   {
-    spheres[i].center = randomCenter();
+    spheres[i].center = randomPoint();
     spheres[i].radius = 25.0;
     spheres[i].color = randomColor();
   }
@@ -59,12 +59,12 @@ int main()
   // for (int i = 0; i < numberOfSpheres; i++)
   //   scene.push_back(&spheres[i]);
   // //PLANOS
-  // Plane plane = Plane(randomVector(), randomCenter(), randomColor());
+  // Plane plane = Plane(randomVector(), randomPoint(), randomColor());
   // // Plane plane = Plane(Vector3D(0, 0, 1), Point3D(50, 50, -100), randomColor());
   // scene.push_back(&plane);
-
+  
   vector<GeometricObject *> scene;
-  Triangle triangle = Triangle(randomCenter(), randomCenter(), randomCenter(), randomColor());
+  Triangle triangle = Triangle(randomPoint(), randomPoint(), randomPoint(), randomColor());
   scene.push_back(&triangle);
   // VIEWPLANE
   int horizontalResolution = 800;
