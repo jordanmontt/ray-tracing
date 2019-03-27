@@ -50,22 +50,15 @@ void fillSpheres(Sphere *spheres, int numberOfSpheres)
 int main()
 {
   srand(time(NULL));
-  // ESCENA------------------------------------------------------------------
-  //ESFERAS
-  // vector<GeometricObject *> scene;
-  // int numberOfSpheres = 100;
-  // Sphere *spheres = new Sphere[numberOfSpheres];
-  // fillSpheres(spheres, numberOfSpheres);
-  // for (int i = 0; i < numberOfSpheres; i++)
-  //   scene.push_back(&spheres[i]);
-  // //PLANOS
-  // Plane plane = Plane(randomVector(), randomPoint(), randomColor());
-  // // Plane plane = Plane(Vector3D(0, 0, 1), Point3D(50, 50, -100), randomColor());
-  // scene.push_back(&plane);
-  
   vector<GeometricObject *> scene;
+  Plane plane = Plane(Vector3D(0, 0, 1), Point3D(0, 0, 0), randomColor(), -150, 350, -250, 250);
+  scene.push_back(&plane);
+
   Triangle triangle = Triangle(randomPoint(), randomPoint(), randomPoint(), randomColor());
   scene.push_back(&triangle);
+
+  Sphere sphere = Sphere(randomPoint(), 50, randomColor());
+  scene.push_back(&sphere);
   // VIEWPLANE
   int horizontalResolution = 800;
   int verticalResolution = 600;
@@ -96,6 +89,6 @@ int main()
       pixeles[rows * width + cols].blue = getPixelColor(ray, scene).blue;
     }
   }
-  savebmp("triangle.bmp", width, height, dpi, pixeles);
+  savebmp("3Figuras.bmp", width, height, dpi, pixeles);
   return 0;
 }
