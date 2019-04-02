@@ -3,16 +3,29 @@
 #include <math.h>
 using namespace std;
 
-Sphere::Sphere() {}
+Sphere::Sphere()
+{
+    this->isAIntersectLine = false;
+}
 
 Sphere::Sphere(Point3D center, double radius) : center(center), radius(radius)
 {
+    this->isAIntersectLine = false;
     color.red = 1.0;
     color.green = 1.0;
     color.blue = 0.0;
 }
 
-Sphere::Sphere(Point3D center, double radius, ColorRGB color) : center(center), radius(radius), color(color) {}
+Sphere::Sphere(Point3D center, double radius, ColorRGB color) : center(center), radius(radius), color(color)
+{
+    this->isAIntersectLine = false;
+}
+
+Sphere::Sphere(Point3D center, double radius, ColorRGB color, Ray intersectLine) : center(center), radius(radius),
+                                                                                   color(color), intersectLine(intersectLine)
+{
+    this->isAIntersectLine = true;
+}
 
 Sphere::~Sphere() {}
 
@@ -34,6 +47,7 @@ bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Poin
     if (equationRoot > 0.000001)
     {
         q = ray.origin + equationRoot * ray.direction;
+        // if (this->isAIntersectLine) {}
         n = (originMinusCenter + equationRoot * ray.direction) / this->radius;
         minEquationRoot = equationRoot;
         return true;

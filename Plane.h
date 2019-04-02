@@ -12,10 +12,6 @@ public:
   ColorRGB color;
   double upperLimit, rightLimit, lowerLimit, leftLimit;
   bool limitsDefined;
-  // Point3D upLeft;
-  // Point3D upRight;
-  // Point3D downLeft;
-  // Point3D downRight;
 
 public:
   Plane();

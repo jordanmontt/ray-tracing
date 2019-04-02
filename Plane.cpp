@@ -19,11 +19,6 @@ Plane::Plane(Vector3D normal, Point3D p, ColorRGB color, double upperLimit,
     this->limitsDefined = true;
 }
 
-// Plane::Plane(Vector3D normal, Point3D p, ColorRGB color,
-//              Point3D upLeft, Point3D upRight, Point3D downLeft, Point3D downRight) : normal(normal), p(p), color(color),
-//                                                                                      upLeft(upLeft), upRight(upRight),
-//                                                                                      downRight(downRight), downLeft(downLeft) {}
-
 bool Plane::isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const
 {
     double numerator = (this->p - ray.origin) * this->normal;
