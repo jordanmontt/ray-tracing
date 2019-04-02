@@ -96,3 +96,29 @@ ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObject
 	}
 	return color;
 }
+
+Point3D randomPoint()
+{
+  double x = (rand() % 748 + 1) - 374;
+  double y = (rand() % 548 + 1) - 274;
+  double z = (rand() % 400 + 1) - 400;
+  Point3D p(x, y, z);
+  return p;
+}
+
+ColorRGB randomColor()
+{
+  ColorRGB color;
+  color.red = (1.0) * ((double)rand() / (double)RAND_MAX);
+  color.green = (1.0) * ((double)rand() / (double)RAND_MAX);
+  color.blue = (1.0) * ((double)rand() / (double)RAND_MAX);
+  return color;
+}
+
+Vector3D randomVector()
+{
+  double x = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  double y = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  double z = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+  return Vector3D(x, y, z);
+}
