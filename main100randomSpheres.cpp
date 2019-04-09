@@ -11,38 +11,12 @@
 #include <cstdlib>
 using namespace std;
 
-Point3D randomPoint()
-{
-    double x = (rand() % 748 + 1) - 374;
-    double y = (rand() % 548 + 1) - 274;
-    double z = (rand() % 400 + 1) - 400;
-    Point3D p(x, y, z);
-    return p;
-}
-
-ColorRGB randomColor()
-{
-    ColorRGB color;
-    color.red = (1.0) * ((double)rand() / (double)RAND_MAX);
-    color.green = (1.0) * ((double)rand() / (double)RAND_MAX);
-    color.blue = (1.0) * ((double)rand() / (double)RAND_MAX);
-    return color;
-}
-
-Vector3D randomVector()
-{
-    double x = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-    double y = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-    double z = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-    return Vector3D(x, y, z);
-}
-
 void fillSpheres(Sphere *spheres, int numberOfSpheres)
 {
     for (int i = 0; i < numberOfSpheres; i++)
     {
         spheres[i].center = randomPoint();
-        spheres[i].radius = 25.0;
+        spheres[i].radius = 50.0;
         spheres[i].color = randomColor();
     }
 }
@@ -53,18 +27,22 @@ int main()
     //ESCENA------------------------------------------------------------------
     //ESFERAS
     vector<GeometricObject *> scene;
-    int numberOfSpheres = 100;
+    int numberOfSpheres = 1000;
     Sphere *spheres = new Sphere[numberOfSpheres];
     fillSpheres(spheres, numberOfSpheres);
     for (int i = 0; i < numberOfSpheres; i++)
         scene.push_back(&spheres[i]);
     //PLANOS
-    Plane plane = Plane(randomVector(), randomPoint(), randomColor());
-    scene.push_back(&plane);
+    // Plane plane = Plane(randomVector(), randomPoint(), randomColor());
+    // scene.push_back(&plane);
+
+    ColorRGB c = randomColor();
+    // Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
+    Spotlight spotlight = Spotlight(c.red, c.green, c.blue, 0.0, 0.0, -30.0);
 
     // VIEWPLANE
-    int horizontalResolution = 800;
-    int verticalResolution = 600;
+    int horizontalResolution = 1080;
+    int verticalResolution = 720;
     double squareSize = 1.0;
     ViewPlane viewPlane(horizontalResolution, verticalResolution, squareSize);
 
@@ -87,9 +65,9 @@ int main()
             Point3D origin(x, y, z);
             Ray ray(origin, direction);
 
-            pixeles[rows * width + cols].red = getPixelColor(ray, scene).red;
-            pixeles[rows * width + cols].green = getPixelColor(ray, scene).green;
-            pixeles[rows * width + cols].blue = getPixelColor(ray, scene).blue;
+            pixeles[rows * width + cols].red = getPixelColor(ray, scene, spotlight).red;
+            pixeles[rows * width + cols].green = getPixelColor(ray, scene, spotlight).green;
+            pixeles[rows * width + cols].blue = getPixelColor(ray, scene, spotlight).blue;
         }
     }
     savebmp("randomSpheres.bmp", width, height, dpi, pixeles);

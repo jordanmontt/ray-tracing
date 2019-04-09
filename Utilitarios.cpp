@@ -9,7 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
+#include <iostream>
 
+using namespace std;
 void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 {
 	FILE *f;
@@ -74,23 +77,61 @@ void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 	fclose(f);
 }
 
-ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObjects)
+ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObjects, Spotlight spotlight)
 {
 	ColorRGB color;
 	color.red = 0.0;
 	color.green = 0.0;
 	color.blue = 0.0;
-	double equationRoot;
-	double minEquationRoot = 2000000;
-	Vector3D normal;
-	Point3D q;
+	double equationRoot, minEquationRoot = 2000000, maxOfLambertianEquation, maxOfPhongEquation, phongCoeficient;
+	Vector3D normal, H, L;
+	Point3D pointOfImpact;
+	ColorRGB geometricObjectColor;
 	for (int i = 0; i < geometricObjects.size(); i++)
 	{
-		if (geometricObjects[i]->isImpact(ray, equationRoot, normal, q) && equationRoot < minEquationRoot)
+		if (geometricObjects[i]->isImpact(ray, equationRoot, normal, pointOfImpact) && equationRoot < minEquationRoot)
 		{
-			color.red = geometricObjects[i]->getColor().red;
+			/* Lambertian equation  
+			pixelColor = surfaceColor * spotlightColor * max(0.0, normal * L) 
+			where L is the vector from the spotlight to the surface */
+			/* Phong
+			coeficienteEspecularSuperficie(color de la superficie) * spotlightColor * (max(0.0, normal * H) )^phongCoeficient
+			where H = V + L
+			where V = vector distance from the pixel to the surface */
+			L = spotlight.position - pointOfImpact;
+			L = L.hat();
+			H = ((-1 * ray.direction) + L);
+			H = H.hat();
+			maxOfLambertianEquation = max(0.0, normal * L);
+			maxOfPhongEquation = max(0.0, normal * H);
+			phongCoeficient = 100000;
+			geometricObjectColor = geometricObjects[i]->getColor();
+			Spotlight ambientLight = Spotlight(0.3137, 0.05098, 0.06666, 0.0, 0.0, -30.0);
+			// ColorRGB c = randomColor();
+			// Spotlight ambientLight = Spotlight(c.red, c.green, c.blue, 0.0, 0.0, -30.0);
+
+			//Phong + Lambertian + Ambient light
+			color.red = geometricObjectColor.red * ambientLight.color.red + geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
+			color.green = geometricObjectColor.green * ambientLight.color.green + geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);
+			color.blue = geometricObjectColor.blue * ambientLight.color.blue + geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation + geometricObjectColor.blue * spotlight.color.blue * pow(maxOfPhongEquation, phongCoeficient);
+
+			/* //Phong + Lambertian
+			color.red = geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
+			color.green = geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);
+			color.blue = geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation + geometricObjectColor.blue * spotlight.color.blue * pow(maxOfPhongEquation, phongCoeficient); */
+
+			// color.red = geometricObjects[i]->getColor().red * spotlight.color.red * std::max(0.0, normal * (spotlight.position - pointOfImpact).hat()) + geometricObjects[i]->getColor().red * spotlight.color.red * pow(std::max(0.0, normal * ((-1) * ray.direction + (spotlight.position - pointOfImpact).hat()).hat()), 10000);
+			// color.green = geometricObjects[i]->getColor().green * spotlight.color.green * std::max(0.0, normal * (spotlight.position - pointOfImpact).hat()) + geometricObjects[i]->getColor().green * spotlight.color.green * pow(std::max(0.0, normal * ((-1) * ray.direction + (spotlight.position - pointOfImpact).hat()).hat()), 10000);
+			// color.blue = geometricObjects[i]->getColor().blue * spotlight.color.blue * std::max(0.0, normal * (spotlight.position - pointOfImpact).hat()) + geometricObjects[i]->getColor().blue * spotlight.color.blue * pow(std::max(0.0, normal * ((-1) * ray.direction + (spotlight.position - pointOfImpact).hat()).hat()), 10000);
+
+			//Lambertian
+			// color.red = geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation;
+			// color.green = geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation;
+			// color.blue = geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation;
+
+			/*color.red = geometricObjects[i]->getColor().red;
 			color.green = geometricObjects[i]->getColor().green;
-			color.blue = geometricObjects[i]->getColor().blue;
+			color.blue = geometricObjects[i]->getColor().blue; */
 			minEquationRoot = equationRoot;
 		}
 	}
@@ -99,26 +140,27 @@ ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObject
 
 Point3D randomPoint()
 {
-  double x = (rand() % 748 + 1) - 374;
-  double y = (rand() % 548 + 1) - 274;
-  double z = (rand() % 400 + 1) - 400;
-  Point3D p(x, y, z);
-  return p;
+	double x = (rand() % 748 + 1) - 374;
+	double y = (rand() % 548 + 1) - 274;
+	double z = (rand() % 391) + 10;
+	z = -z;
+	Point3D p(x, y, z);
+	return p;
 }
 
 ColorRGB randomColor()
 {
-  ColorRGB color;
-  color.red = (1.0) * ((double)rand() / (double)RAND_MAX);
-  color.green = (1.0) * ((double)rand() / (double)RAND_MAX);
-  color.blue = (1.0) * ((double)rand() / (double)RAND_MAX);
-  return color;
+	ColorRGB color;
+	color.red = (1.0) * ((double)rand() / (double)RAND_MAX);
+	color.green = (1.0) * ((double)rand() / (double)RAND_MAX);
+	color.blue = (1.0) * ((double)rand() / (double)RAND_MAX);
+	return color;
 }
 
 Vector3D randomVector()
 {
-  double x = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-  double y = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-  double z = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
-  return Vector3D(x, y, z);
+	double x = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+	double y = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+	double z = (2.0 - 1.0) * ((double)rand() / (double)RAND_MAX) + 1.0;
+	return Vector3D(x, y, z);
 }

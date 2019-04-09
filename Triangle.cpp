@@ -6,7 +6,7 @@ Triangle::Triangle(Point3D a, Point3D b, Point3D c) : a(a), b(b), c(c) {}
 
 Triangle::Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color) : a(a), b(b), c(c), color(color) {}
 
-bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const
+bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &normal, Point3D &pointQ) const
 {
     double determinantDenominator, determinantBeta, determinantGamma, determinantTLine;
     double a, b, c, d, e, f, g, h, i, j, k, l;
@@ -33,7 +33,8 @@ bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) cons
     gamma = determinantGamma / determinantDenominator;
     tLine = determinantTLine / determinantDenominator;
     alpha = 1.0 - beta - gamma;
-    q = alpha * this->a + beta * this->b + gamma * this->c;
+    pointQ = alpha * this->a + beta * this->b + gamma * this->c;
+    normal = ((this->b - this->a) ^ (this->c - this->a)).hat();
     if (beta > 0 && gamma > 0 && (beta + gamma) < 1)
         return true;
     return false;

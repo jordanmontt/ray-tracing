@@ -15,17 +15,19 @@ int main()
 {
   srand(time(NULL));
   vector<GeometricObject *> scene;
-  Plane plane = Plane(Vector3D(0, 0, 1), Point3D(0, 0, 0), randomColor(), -150, 350, -250, 250);
-  scene.push_back(&plane);
 
-  Triangle triangle = Triangle(randomPoint(), randomPoint(), randomPoint(), randomColor());
-  scene.push_back(&triangle);
+  // Triangle triangle = Triangle(randomPoint(), randomPoint(), randomPoint(), randomColor());
+  // scene.push_back(&triangle);
 
-  Sphere sphere = Sphere(randomPoint(), 50, randomColor());
+  Sphere sphere = Sphere(Point3D(0.0, 0.0, -400.0), 120.0, randomColor());
+  // sphere.setColor(0.5, 0.3, 0.3);
+  sphere.setColor(0.568, 0.0901, 0.1215);
   scene.push_back(&sphere);
+  // LUZ
+  Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
   // VIEWPLANE
-  int horizontalResolution = 800;
-  int verticalResolution = 600;
+  int horizontalResolution = 1080;
+  int verticalResolution = 720;
   double squareSize = 1.0;
   ViewPlane viewPlane(horizontalResolution, verticalResolution, squareSize);
 
@@ -48,11 +50,11 @@ int main()
       Point3D origin(x, y, z);
       Ray ray(origin, direction);
 
-      pixeles[rows * width + cols].red = getPixelColor(ray, scene).red;
-      pixeles[rows * width + cols].green = getPixelColor(ray, scene).green;
-      pixeles[rows * width + cols].blue = getPixelColor(ray, scene).blue;
+      pixeles[rows * width + cols].red = getPixelColor(ray, scene, spotlight).red;
+      pixeles[rows * width + cols].green = getPixelColor(ray, scene, spotlight).green;
+      pixeles[rows * width + cols].blue = getPixelColor(ray, scene, spotlight).blue;
     }
   }
-  savebmp("3Figuras.bmp", width, height, dpi, pixeles);
+  savebmp("aaa.bmp", width, height, dpi, pixeles);
   return 0;
 }

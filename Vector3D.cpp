@@ -1,4 +1,5 @@
 #include "Vector3D.h"
+#include <math.h>
 
 Vector3D::Vector3D() : x(0), y(0), z(1) {}
 
@@ -72,4 +73,13 @@ Vector3D Vector3D::operator^(const Vector3D &v) const
 void Vector3D::show()
 {
     cout << "<" << x << ", " << y << ", " << z << ">" << endl;
+}
+
+Vector3D Vector3D::hat()
+{
+    double module = sqrt(x * x + y * y + z * z);
+    this->x /= module;
+    this->y /= module;
+    this->z /= module;
+    return (*this);
 }
