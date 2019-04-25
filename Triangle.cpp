@@ -1,28 +1,28 @@
 #include "Triangle.h"
 
-Triangle::Triangle() {}
+Triangle::Triangle() : GeometricObject() {}
 
-Triangle::Triangle(Point3D a, Point3D b, Point3D c) : a(a), b(b), c(c) {}
+Triangle::Triangle(Point3D a, Point3D b, Point3D c) : A(a), B(b), C(c) {}
 
-Triangle::Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color) : a(a), b(b), c(c), color(color) {}
+Triangle::Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color) : A(a), B(b), C(c), color(color) {}
 
-bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &normal, Point3D &pointQ) const
+bool Triangle::isImpact(const Ray &ray, double &tmin, Vector3D &normal, Point3D &pointQ) const
 {
     double determinantDenominator, determinantBeta, determinantGamma, determinantTLine;
     double a, b, c, d, e, f, g, h, i, j, k, l;
     double beta, gamma, alpha, tLine;
-    a = this->a.x - this->b.x;
-    b = this->a.x - this->c.x;
+    a = this->A.x - this->B.x;
+    b = this->A.x - this->C.x;
     c = ray.direction.x;
-    d = this->a.x - ray.origin.x;
-    e = this->a.y - this->b.y;
-    f = this->a.y - this->c.y;
+    d = this->A.x - ray.origin.x;
+    e = this->A.y - this->B.y;
+    f = this->A.y - this->C.y;
     g = ray.direction.y;
-    h = this->a.y - ray.origin.y;
-    i = this->a.z - this->b.z;
-    j = this->a.z - this->c.z;
+    h = this->A.y - ray.origin.y;
+    i = this->A.z - this->B.z;
+    j = this->A.z - this->C.z;
     k = ray.direction.z;
-    l = this->a.z - ray.origin.z;
+    l = this->A.z - ray.origin.z;
 
     determinantDenominator = a * (f * k - g * j) + b * (g * i - e * k) + c * (e * j - f * i);
     determinantBeta = d * (f * k - g * j) + b * (g * l - h * k) + c * (h * j - f * l);
@@ -32,10 +32,12 @@ bool Triangle::isImpact(const Ray &ray, double &t, Vector3D &normal, Point3D &po
     beta = determinantBeta / determinantDenominator;
     gamma = determinantGamma / determinantDenominator;
     tLine = determinantTLine / determinantDenominator;
+
     alpha = 1.0 - beta - gamma;
-    pointQ = alpha * this->a + beta * this->b + gamma * this->c;
-    normal = ((this->b - this->a) ^ (this->c - this->a)).hat();
-    if (beta > 0 && gamma > 0 && (beta + gamma) < 1)
+    pointQ = ray.origin + tLine * ray.direction;
+    normal = ((this->B - this->A) ^ (this->C - this->A)).hat();
+    tmin = tLine;
+    if (beta > 0.0 && gamma > 0.0 && (beta + gamma) < 1.0)
         return true;
     return false;
 }
@@ -54,4 +56,9 @@ ColorRGB Triangle::getColor()
     c.green = this->color.green;
     c.blue = this->color.blue;
     return c;
+}
+
+void Triangle::setHasShadow(bool shadow)
+{
+    this->hasShadow = shadow;
 }

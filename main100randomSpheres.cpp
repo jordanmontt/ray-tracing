@@ -27,7 +27,7 @@ int main()
     //ESCENA------------------------------------------------------------------
     //ESFERAS
     vector<GeometricObject *> scene;
-    int numberOfSpheres = 1000;
+    int numberOfSpheres = 100;
     Sphere *spheres = new Sphere[numberOfSpheres];
     fillSpheres(spheres, numberOfSpheres);
     for (int i = 0; i < numberOfSpheres; i++)

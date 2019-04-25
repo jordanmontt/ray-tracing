@@ -1,6 +1,6 @@
 #include "Plane.h"
 
-Plane::Plane() {}
+Plane::Plane() : GeometricObject() {}
 
 Plane::Plane(Vector3D normal, Point3D p) : normal(normal), p(p)
 {
@@ -52,4 +52,9 @@ ColorRGB Plane::getColor()
     c.green = this->color.green;
     c.blue = this->color.blue;
     return c;
+}
+
+void Plane::setHasShadow(bool shadow)
+{
+    this->hasShadow = shadow;
 }

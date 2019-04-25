@@ -15,6 +15,7 @@ class ColorRGB
 
   public:
     ColorRGB();
+    ColorRGB(double red, double green, double blue);
     ~ColorRGB();
 };
 #endif

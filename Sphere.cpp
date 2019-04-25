@@ -3,7 +3,7 @@
 #include <math.h>
 using namespace std;
 
-Sphere::Sphere()
+Sphere::Sphere() : GeometricObject()
 {
     this->isAIntersectLine = false;
 }
@@ -77,4 +77,9 @@ ColorRGB Sphere::getColor()
     c.green = this->color.green;
     c.blue = this->color.blue;
     return c;
+}
+
+void Sphere::setHasShadow(bool shadow)
+{
+    this->hasShadow = shadow;
 }

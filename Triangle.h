@@ -6,18 +6,19 @@
 
 class Triangle : public GeometricObject
 {
-  public:
-    Point3D a;
-    Point3D b;
-    Point3D c;
-    ColorRGB color;
+public:
+  Point3D A;
+  Point3D B;
+  Point3D C;
+  ColorRGB color;
 
-  public:
-    Triangle();
-    Triangle(Point3D a, Point3D b, Point3D c);
-    Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color);
-    bool isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const;
-    void setColor(double red, double green, double blue);
-    ColorRGB getColor();
+public:
+  Triangle();
+  Triangle(Point3D a, Point3D b, Point3D c);
+  Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color);
+  bool isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const;
+  void setColor(double red, double green, double blue);
+  ColorRGB getColor();
+  void setHasShadow(bool shadow);
 };
 #endif

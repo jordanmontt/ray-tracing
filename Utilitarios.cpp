@@ -68,9 +68,9 @@ void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 	for (int i = 0; i < k; i++)
 	{
 		ColorRGB rgb = data[i];
-		double red = (data[i].red) * 255;
-		double green = (data[i].green) * 255;
-		double blue = (data[i].blue) * 255;
+		double red = (data[i].red > 1.0 ? 1.0 : data[i].red) * 255;
+		double green = (data[i].green > 1.0 ? 1.0 : data[i].green) * 255;
+		double blue = (data[i].blue > 1.0 ? 1.0 : data[i].blue) * 255;
 		unsigned char color[3] = {(int)floor(blue), (int)floor(green), (int)floor(red)};
 		fwrite(color, 1, 3, f);
 	}
@@ -106,16 +106,27 @@ ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObject
 			maxOfPhongEquation = max(0.0, normal * H);
 			phongCoeficient = 100000;
 			geometricObjectColor = geometricObjects[i]->getColor();
-			Spotlight ambientLight = Spotlight(0.3137, 0.05098, 0.06666, 0.0, 0.0, -30.0);
+			// Spotlight ambientLight = Spotlight(0.6953, 0.6118, 0.5176, 0.0, 0.0, -30.0);
+			Spotlight ambientLight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);
 			// ColorRGB c = randomColor();
 			// Spotlight ambientLight = Spotlight(c.red, c.green, c.blue, 0.0, 0.0, -30.0);
 
-			//Phong + Lambertian + Ambient light
-			color.red = geometricObjectColor.red * ambientLight.color.red + geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
-			color.green = geometricObjectColor.green * ambientLight.color.green + geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);
-			color.blue = geometricObjectColor.blue * ambientLight.color.blue + geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation + geometricObjectColor.blue * spotlight.color.blue * pow(maxOfPhongEquation, phongCoeficient);
+			if (geometricObjects[i]->hasShadow)
+			{
+				//Phong + Lambertian + Ambient light
+				color.red = geometricObjectColor.red * ambientLight.color.red + geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
+				color.green = geometricObjectColor.green * ambientLight.color.green + geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);
+				color.blue = geometricObjectColor.blue * ambientLight.color.blue + geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation + geometricObjectColor.blue * spotlight.color.blue * pow(maxOfPhongEquation, phongCoeficient);
+			}
+			else
+			{
+				//Lambertian
+				color.red = geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation;
+				color.green = geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation;
+				color.blue = geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation;
+			}
 
-			/* //Phong + Lambertian
+			/*//Phong + Lambertian
 			color.red = geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
 			color.green = geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);
 			color.blue = geometricObjectColor.blue * spotlight.color.blue * maxOfLambertianEquation + geometricObjectColor.blue * spotlight.color.blue * pow(maxOfPhongEquation, phongCoeficient); */

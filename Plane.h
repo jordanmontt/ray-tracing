@@ -24,5 +24,6 @@ public:
   bool isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const;
   void setColor(double red, double green, double blue);
   ColorRGB getColor();
+  void setHasShadow(bool shadow);
 };
 #endif
