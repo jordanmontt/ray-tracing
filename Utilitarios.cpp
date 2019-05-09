@@ -80,9 +80,9 @@ void savebmp(const char *filename, int w, int h, int dpi, ColorRGB *data)
 ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObjects, Spotlight spotlight)
 {
 	ColorRGB color;
-	color.red = 0.0;
-	color.green = 0.0;
-	color.blue = 0.0;
+	color.red = 0.3765;
+	color.green = 0.3765;
+	color.blue = 0.3765;
 	double equationRoot, minEquationRoot = 2000000, maxOfLambertianEquation, maxOfPhongEquation, phongCoeficient;
 	Vector3D normal, H, L;
 	Point3D pointOfImpact;

@@ -5,20 +5,12 @@
 #include "Triangle.h"
 #include "GeometricObject.h"
 #include "ViewPlane.h"
+#include "Quadrilateral.h"
 #include "Plane.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
 using namespace std;
-
-vector<GeometricObject *> makeScene()
-{
-    vector<GeometricObject *> scene;
-    Sphere body = Sphere(Point3D(-270.0, 0.0, -500.0), 240.0, ColorRGB(1.0, 0.8039, 0.5804));
-
-    scene.push_back(&body);
-    return scene;
-}
 
 int main()
 {
@@ -40,9 +32,44 @@ int main()
     Sphere rightPupil = Sphere(Point3D(-116.94, 79.34, -725.0), 10.52, ColorRGB(0.0, 0.0, 0.0));
     Sphere leftPupil = Sphere(Point3D(-239.15, 80.61, -725.0), 11.52, ColorRGB(0.0, 0.0, 0.0));
 
-    Triangle eyelashOne = Triangle(Point3D(-385.6, 111.88, -800), Point3D(-388.03, 99.24, -800), Point3D(-357.24, 99.7, -800), ColorRGB(0.0, 0.0, 0.0));
-    Triangle eyelashTwo = Triangle(Point3D(-380.61, 130.18, -800), Point3D(-384.81, 118.53, -800), Point3D(-356.32, 113.48, -800), ColorRGB(0.0, 0.0, 0.0));
-    Triangle eyelashThree = Triangle(Point3D(-371.74, 148.47, -800), Point3D(-376.54, 135.99, -800), Point3D(-348.51, 129.33, -800), ColorRGB(0.0, 0.0, 0.0));
+    Sphere ear = Sphere(Point3D(-422.57, 27.76, -725.0), 28.814, ColorRGB(0.7686, 0.6118, 0.4274));
+    // ear.hasShadow = false;
+
+    Triangle leftCrownTriangle = Triangle(Point3D(-457.81, 212.82, -800.0), Point3D(-441.6, 191.31, -800.0), Point3D(-416.36, 209.86, -800.0), ColorRGB(1.0, 0.8745, 0.0));
+    Triangle middleCrownTriangle = Triangle(Point3D(-431.8, 233.17, -800.0), Point3D(-428.6, 200.81, -800.0), Point3D(-395.32, 225.26, -800.0), ColorRGB(1.0, 0.8745, 0.0));
+    Triangle rightCrownTriangle = Triangle(Point3D(-392.47, 257.97, -800.0), Point3D(-403.74, 219.32, -800.0), Point3D(-375.85, 239.15, -800.0), ColorRGB(1.0, 0.8745, 0.0));
+
+    // Quadrilateral eyelashOne = Quadrilateral(Point3D(-388.24, 101.21, -800.0), Point3D(-359.65, 98.42, -800.0), Point3D(-356.56, 108.94, -800.0), Point3D(-385.92, 116.66, -800.0));
+    // eyelashOne.color = ColorRGB(0.0, 0.0, 0.0);
+    // Quadrilateral eyelashTwo = Quadrilateral(Point3D(-378.97, 131.34, -800.0), Point3D(-351.92, 123.62, -800.0), Point3D(-347.29, 131.34, -800.0), Point3D(-370.47, 145.25, -800.0));
+    // eyelashTwo.color = ColorRGB(0.0, 0.0, 0.0);
+    // Quadrilateral eyelashThree = Quadrilateral(Point3D(-360.42, 156.07, -800), Point3D(-338.02, 142.93, -800.0), Point3D(-330.29, 149.88, -800.0), Point3D(-348.06, 169.2, -800.0));
+    // eyelashThree.color = ColorRGB(0.0, 0.0, 0.0);
+
+    Quadrilateral eyelashOne = Quadrilateral(Point3D(-353.76, 118.48, -800.0), Point3D(-351.15, 123.7, -800.0), Point3D(-377.24, 139.35, -800.0), Point3D(-384.42, 126.31, -800.0));
+    eyelashOne.color = ColorRGB(0.0, 0.0, 0.0);
+    Quadrilateral eyelashTwo = Quadrilateral(Point3D(-345.28, 132.83, -800.0), Point3D(-341.74, 137.86, -800.0), Point3D(-365.18, 155.01, -800.0), Point3D(-373.33, 143.27, -800.0));
+    eyelashTwo.color = ColorRGB(0.0, 0.0, 0.0);
+    Quadrilateral eyelashThree = Quadrilateral(Point3D(-335.5, 143.27, -800), Point3D(-330.6, 147.18, -800.0), Point3D(-349.19, 170.34, -800.0), Point3D(-360.0, 160.0, -800.0));
+    eyelashThree.color = ColorRGB(0.0, 0.0, 0.0);
+
+    Quadrilateral upperRightEyelash = Quadrilateral(Point3D(-109.08, 162.0, -800.0), Point3D(-127.37, 137.71, -800.0), Point3D(-124.07, 134.41, -800.0), Point3D(-98.88, 150.01, -800.0));
+    upperRightEyelash.color = ColorRGB(0.0, 0.0, 0.0);
+    Quadrilateral middleRightEyelash = Quadrilateral(Point3D(-94.62, 146.55, -800.0), Point3D(-116.96, 128.13, -800.0), Point3D(-113.03, 122.25, -800.0), Point3D(-86.01, 135.07, -800.0));
+    middleRightEyelash.color = ColorRGB(0.0, 0.0, 0.0);
+    Quadrilateral lowerRightEyelash = Quadrilateral(Point3D(-82.28, 130.57, -800.0), Point3D(-110.09, 114.34, -800.0), Point3D(-107.28, 107.59, -800.0), Point3D(-76.1, 115.89, -800.0));
+    lowerRightEyelash.color = ColorRGB(0.0, 0.0, 0.0);
+
+    Quadrilateral bottle = Quadrilateral(Point3D(-470.52, -151.26, -800.0), Point3D(-510.8, -186.18, -800.0), Point3D(-426.04, -271.53, -800.0), Point3D(-384.32, -235.32, -800.0));
+    bottle.color = ColorRGB(0.8627, 0.85098, 0.8039);
+    Quadrilateral bottleCap = Quadrilateral(Point3D(-426.96, -286.28, -800.0), Point3D(-368.84, -236.23, -800.0), Point3D(-376.37, -229.19, -800.0), Point3D(-434.49, -278.42, -800.0));
+    bottleCap.color = ColorRGB(0.8078, 0.5647, 0.6235);
+
+    Sphere pacifier = Sphere(Point3D(-395.9, -264.4, -900.0), 29.5733, ColorRGB(0.8078, 0.5647, 0.6235));
+    Sphere pacifierTop = Sphere(Point3D(-374.12, -284.94, -900.0), 8.34146, ColorRGB(0.8078, 0.5647, 0.6235));
+
+    Sphere handInBottle = Sphere(Point3D(-426.98, -186.18, -700.0), 39.1311, ColorRGB(1.0, 0.8039, 0.5804));
+    Quadrilateral rightArm = Quadrilateral(Point3D(-402.43695, -157.37612, -600.0), Point3D(-407.77192, -68.81551, -600.0), Point3D(-453.65272, -48.5426, -600.0), Point3D(-454.71971, -157.37612, -600.0), ColorRGB(0.7569, 0.5843, 0.8941));
 
     Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.18, 0.2274, 0.1333));
 
@@ -53,10 +80,23 @@ int main()
     scene.push_back(&rightIris);
     scene.push_back(&rightPupil);
     scene.push_back(&leftPupil);
+    scene.push_back(&ear);
     scene.push_back(&faso);
     scene.push_back(&eyelashOne);
     scene.push_back(&eyelashTwo);
     scene.push_back(&eyelashThree);
+    scene.push_back(&upperRightEyelash);
+    scene.push_back(&middleRightEyelash);
+    scene.push_back(&lowerRightEyelash);
+    scene.push_back(&leftCrownTriangle);
+    scene.push_back(&middleCrownTriangle);
+    scene.push_back(&rightCrownTriangle);
+    scene.push_back(&bottle);
+    scene.push_back(&bottleCap);
+    scene.push_back(&pacifier);
+    scene.push_back(&pacifierTop);
+    scene.push_back(&handInBottle);
+    scene.push_back(&rightArm);
 
     // Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
     Spotlight spotlight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);

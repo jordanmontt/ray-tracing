@@ -13,6 +13,6 @@ public:
   GeometricObject();
   virtual bool isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const = 0;
   virtual ColorRGB getColor() = 0;
-  virtual void setHasShadow(bool shadow) = 0;
+  // virtual void setHasShadow(bool shadow) = 0;
 };
 #endif
