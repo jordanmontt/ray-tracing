@@ -70,6 +70,8 @@ int main()
 
     Sphere handInBottle = Sphere(Point3D(-426.98, -186.18, -700.0), 39.1311, ColorRGB(1.0, 0.8039, 0.5804));
     Quadrilateral rightArm = Quadrilateral(Point3D(-402.43695, -157.37612, -600.0), Point3D(-407.77192, -68.81551, -600.0), Point3D(-453.65272, -48.5426, -600.0), Point3D(-454.71971, -157.37612, -600.0), ColorRGB(0.7569, 0.5843, 0.8941));
+    Sphere leftHand = Sphere(Point3D(-104.28, -158.52, -1300.0), 38.51, ColorRGB(1.0, 0.8039, 0.5804));
+    Quadrilateral leftArm = Quadrilateral(Point3D(-88.93116, -59.13149, -1200.0), Point3D(-135.26087, -62.10503, -1200.0), Point3D(-139.0977, -135.964, -1200.0), Point3D(-74.83081, -135.964, -1200.0), ColorRGB(0.7569, 0.5843, 0.8941));
 
     Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.18, 0.2274, 0.1333));
 
@@ -97,6 +99,8 @@ int main()
     scene.push_back(&pacifierTop);
     scene.push_back(&handInBottle);
     scene.push_back(&rightArm);
+    scene.push_back(&leftHand);
+    scene.push_back(&leftArm);
 
     // Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
     Spotlight spotlight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);

@@ -1,3 +1,5 @@
  g++ -o r GeometricObject.cpp main.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp
 
  g++ -o r GeometricObject.cpp mainPoof.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp Quadrilateral.cpp
+ ./r.exe
+ 
