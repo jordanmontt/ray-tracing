@@ -73,6 +73,11 @@ int main()
     Sphere leftHand = Sphere(Point3D(-104.28, -158.52, -1300.0), 38.51, ColorRGB(1.0, 0.8039, 0.5804));
     Quadrilateral leftArm = Quadrilateral(Point3D(-88.93116, -59.13149, -1200.0), Point3D(-135.26087, -62.10503, -1200.0), Point3D(-139.0977, -135.964, -1200.0), Point3D(-74.83081, -135.964, -1200.0), ColorRGB(0.7569, 0.5843, 0.8941));
 
+    Quadrilateral rightLeg = Quadrilateral(Point3D(-345.21, -221.07, -1000.0), Point3D(-300.0, -221.08, -1000.0), Point3D(-300.0, -161.08, -1000.0), Point3D(-345.54, -160.86, -1000.0), ColorRGB(0.7569, 0.5843, 0.8941));
+    Sphere rightFoot = Sphere(Point3D(-322.55, -223.15, -1100.0), 23.0, ColorRGB(1.0, 1.0, 1.0));
+    Quadrilateral leftLeg = Quadrilateral(Point3D(-244.04, -220.06, -1000.0), Point3D(-198.78, -220.21, -1000.0), Point3D(-198.73, -160.27, -1000.0), Point3D(-244.04, -159.77, -1000.0), ColorRGB(0.7569, 0.5843, 0.8941));
+    Sphere leftFoot = Sphere(Point3D(-220.67, -222.72, -1100.0), 22.5, ColorRGB(1.0, 1.0, 1.0));
+
     Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.18, 0.2274, 0.1333));
 
     scene.push_back(&body);
@@ -101,6 +106,10 @@ int main()
     scene.push_back(&rightArm);
     scene.push_back(&leftHand);
     scene.push_back(&leftArm);
+    scene.push_back(&rightLeg);
+    scene.push_back(&rightFoot);
+    scene.push_back(&leftLeg);
+    scene.push_back(&leftFoot);
 
     // Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
     Spotlight spotlight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);
