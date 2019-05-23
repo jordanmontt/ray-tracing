@@ -49,7 +49,7 @@ void Triangle::setColor(double red, double green, double blue)
     this->color.blue = blue;
 }
 
-ColorRGB Triangle::getColor()
+ColorRGB Triangle::getColor(Point3D hitPoint)
 {
     ColorRGB c;
     c.red = this->color.red;

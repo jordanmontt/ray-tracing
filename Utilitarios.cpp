@@ -105,7 +105,8 @@ ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObject
 			maxOfLambertianEquation = max(0.0, normal * L);
 			maxOfPhongEquation = max(0.0, normal * H);
 			phongCoeficient = 100000;
-			geometricObjectColor = geometricObjects[i]->getColor();
+			geometricObjectColor = geometricObjects[i]->getColor(Point3D(normal.x, normal.y, normal.z));
+
 			// Spotlight ambientLight = Spotlight(0.6953, 0.6118, 0.5176, 0.0, 0.0, -30.0);
 			Spotlight ambientLight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);
 			// ColorRGB c = randomColor();
@@ -113,6 +114,7 @@ ColorRGB getPixelColor(const Ray &ray, vector<GeometricObject *> geometricObject
 
 			if (geometricObjects[i]->hasShadow)
 			{
+
 				//Phong + Lambertian + Ambient light
 				color.red = geometricObjectColor.red * ambientLight.color.red + geometricObjectColor.red * spotlight.color.red * maxOfLambertianEquation + geometricObjectColor.red * spotlight.color.red * pow(maxOfPhongEquation, phongCoeficient);
 				color.green = geometricObjectColor.green * ambientLight.color.green + geometricObjectColor.green * spotlight.color.green * maxOfLambertianEquation + geometricObjectColor.green * spotlight.color.green * pow(maxOfPhongEquation, phongCoeficient);

@@ -31,7 +31,7 @@ bool Quadrilateral::isImpact(const Ray &ray, double &t, Vector3D &normal, Point3
         return false;
 }
 
-ColorRGB Quadrilateral::getColor()
+ColorRGB Quadrilateral::getColor(Point3D hitPoint)
 {
     return this->color;
 }

@@ -1,11 +1,15 @@
 #include "Sphere.h"
 #include <iostream>
 #include <math.h>
+#include <stdio.h>
+#include <string.h>
+
 using namespace std;
 
 Sphere::Sphere() : GeometricObject()
 {
     this->isAIntersectLine = false;
+    this->im = NULL;
 }
 
 Sphere::Sphere(Point3D center, double radius) : center(center), radius(radius)
@@ -14,10 +18,12 @@ Sphere::Sphere(Point3D center, double radius) : center(center), radius(radius)
     color.red = 1.0;
     color.green = 1.0;
     color.blue = 0.0;
+    this->im = NULL;
 }
 
 Sphere::Sphere(Point3D center, double radius, ColorRGB color) : center(center), radius(radius), color(color)
 {
+    this->im = NULL;
     this->isAIntersectLine = false;
 }
 
@@ -25,11 +31,12 @@ Sphere::Sphere(Point3D center, double radius, ColorRGB color, Ray intersectLine)
                                                                                    color(color), intersectLine(intersectLine)
 {
     this->isAIntersectLine = true;
+    this->im = NULL;
 }
 
 Sphere::~Sphere() {}
 
-bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Point3D &q) const
+bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &normal, Point3D &q) const
 {
     double equationRoot;
     Vector3D originMinusCenter = ray.origin - this->center;
@@ -48,7 +55,7 @@ bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Poin
     {
         q = ray.origin + equationRoot * ray.direction;
         // if (this->isAIntersectLine) {}
-        n = (originMinusCenter + equationRoot * ray.direction) / this->radius;
+        normal = (originMinusCenter + equationRoot * ray.direction) / this->radius;
         minEquationRoot = equationRoot;
         return true;
     }
@@ -57,7 +64,7 @@ bool Sphere::isImpact(const Ray &ray, double &minEquationRoot, Vector3D &n, Poin
     if (equationRoot > 0.000001)
     {
         q = ray.origin + equationRoot * ray.direction;
-        n = (originMinusCenter + equationRoot * ray.direction) / this->radius;
+        normal = (originMinusCenter + equationRoot * ray.direction) / this->radius;
         minEquationRoot = equationRoot;
         return true;
     }
@@ -70,9 +77,13 @@ void Sphere::setColor(double red, double green, double blue)
     this->color.blue = blue;
 }
 
-ColorRGB Sphere::getColor()
+ColorRGB Sphere::getColor(Point3D hitPoint)
 {
     ColorRGB c;
+    if (this->im != NULL)
+    {
+        return im->get_color(hitPoint);
+    }
     c.red = this->color.red;
     c.green = this->color.green;
     c.blue = this->color.blue;
@@ -82,4 +93,14 @@ ColorRGB Sphere::getColor()
 void Sphere::setHasShadow(bool shadow)
 {
     this->hasShadow = shadow;
+}
+
+void Sphere::setImTexture(string path)
+{
+    char charArray[path.length() + 1];
+    strcpy(charArray, path.c_str());
+    im = new ImTexture();
+    m.read_ppm_file(charArray);
+    im->set_image(&m);
+    im->set_SphereMap(&sm);
 }

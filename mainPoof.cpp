@@ -19,6 +19,7 @@ int main()
     //ESFERAS
     vector<GeometricObject *> scene;
     Sphere body = Sphere(Point3D(-270.0, 0.0, -1000.0), 200.0, ColorRGB(1.0, 0.8039, 0.5804));
+    body.setImTexture("./Texturas/poof.ppm");
 
     // Sphere rightEye = Sphere(Point3D(-165.07, 90.46, -830.0), 60.55, ColorRGB(1.0, 0.6549, 0.8235));
     // Sphere leftEye = Sphere(Point3D(-291.78, 95.54, -820.0), 65.16, ColorRGB(1.0, 0.6549, 0.8235));
@@ -33,7 +34,6 @@ int main()
     Sphere leftPupil = Sphere(Point3D(-239.15, 80.61, -725.0), 11.52, ColorRGB(0.0, 0.0, 0.0));
 
     Sphere ear = Sphere(Point3D(-422.57, 27.76, -725.0), 28.814, ColorRGB(0.7686, 0.6118, 0.4274));
-    // ear.hasShadow = false;
 
     Triangle leftCrownTriangle = Triangle(Point3D(-457.81, 212.82, -800.0), Point3D(-441.6, 191.31, -800.0), Point3D(-416.36, 209.86, -800.0), ColorRGB(1.0, 0.8745, 0.0));
     Triangle middleCrownTriangle = Triangle(Point3D(-431.8, 233.17, -800.0), Point3D(-428.6, 200.81, -800.0), Point3D(-395.32, 225.26, -800.0), ColorRGB(1.0, 0.8745, 0.0));

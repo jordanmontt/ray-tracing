@@ -1,0 +1,61 @@
+#include "Utilitarios.h"
+#include "Vector3D.h"
+#include "Point3D.h"
+#include "Sphere.h"
+#include "Triangle.h"
+#include "GeometricObject.h"
+#include "ViewPlane.h"
+#include "Quadrilateral.h"
+#include "Plane.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    srand(time(NULL));
+    //ESCENA------------------------------------------------------------------
+    //ESFERAS
+    vector<GeometricObject *> scene;
+    Sphere earth = Sphere(Point3D(-270.0, 0.0, -1000.0), 200.0, ColorRGB(1.0, 1.0, 1.0));
+    earth.setImTexture("./Texturas/jupiter.ppm");
+
+    scene.push_back(&earth);
+
+    Spotlight spotlight = Spotlight(1.0, 1.0, 1.0, 0.0, 0.0, -30.0);
+    // Spotlight spotlight = Spotlight(0.5, 0.5, 0.5, 0.0, 0.0, -30.0);
+
+    // VIEWPLANE
+    int horizontalResolution = 1080;
+    int verticalResolution = 720;
+    double squareSize = 1.0;
+    ViewPlane viewPlane(horizontalResolution, verticalResolution, squareSize);
+
+    // UTILITARIO PARA GUARDAR IMAGEN -------------------------------------------------------------------
+    int dpi = 72;
+    int width = viewPlane.horizontalResolution;
+    int height = viewPlane.verticalResolution;
+    ColorRGB *pixeles = new ColorRGB[width * height];
+
+    // ALGORITMO
+    for (int rows = 0; rows < viewPlane.verticalResolution; rows++)
+    {
+        for (int cols = 0; cols < viewPlane.horizontalResolution; cols++)
+        {
+            // Disparar un rayo
+            Vector3D direction(0.0, 0.0, -1.0);
+            double x = viewPlane.squareSize * (cols - viewPlane.horizontalResolution / 2 + 0.5);
+            double y = viewPlane.squareSize * (rows - viewPlane.verticalResolution / 2 + 0.5);
+            double z = 0;
+            Point3D origin(x, y, z);
+            Ray ray(origin, direction);
+
+            pixeles[rows * width + cols].red = getPixelColor(ray, scene, spotlight).red;
+            pixeles[rows * width + cols].green = getPixelColor(ray, scene, spotlight).green;
+            pixeles[rows * width + cols].blue = getPixelColor(ray, scene, spotlight).blue;
+        }
+    }
+    savebmp("poof.bmp", width, height, dpi, pixeles);
+    return 0;
+}

@@ -45,7 +45,7 @@ void Plane::setColor(double red, double green, double blue)
     this->color.blue = blue;
 }
 
-ColorRGB Plane::getColor()
+ColorRGB Plane::getColor(Point3D hitPoint)
 {
     ColorRGB c;
     c.red = this->color.red;

@@ -1,5 +1,8 @@
- g++ -o r GeometricObject.cpp main.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp
+g++ -o r GeometricObject.cpp main.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp
 
- g++ -o r GeometricObject.cpp mainPoof.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp Quadrilateral.cpp
- ./r.exe
+g++ -o r GeometricObject.cpp mainPoof.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp Quadrilateral.cpp Image.cpp ImageTexture.cpp ImTexture.cpp Maths.cpp SphereMap.cpp
+./r.exe
+ 
+g++ -o r GeometricObject.cpp mainTextura.cpp Plane.cpp Point3D.cpp Ray.cpp Sphere.cpp Triangle.cpp Utilitarios.cpp Vector3D.cpp ViewPlane.cpp Spotlight.cpp ColorRGB.cpp Quadrilateral.cpp Image.cpp ImageTexture.cpp ImTexture.cpp Maths.cpp SphereMap.cpp
+./r.exe
  

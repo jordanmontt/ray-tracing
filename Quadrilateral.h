@@ -19,6 +19,6 @@ public:
     Quadrilateral(Point3D A, Point3D B, Point3D C, Point3D D);
     ~Quadrilateral();
     bool isImpact(const Ray &ray, double &t, Vector3D &n, Point3D &q) const;
-    ColorRGB getColor();
+    ColorRGB getColor(Point3D);
 };
 #endif
