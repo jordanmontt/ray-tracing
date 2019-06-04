@@ -16,13 +16,9 @@ int main()
 {
     srand(time(NULL));
     //ESCENA------------------------------------------------------------------
-    //ESFERAS
     vector<GeometricObject *> scene;
     Sphere body = Sphere(Point3D(-270.0, 0.0, -1000.0), 200.0, ColorRGB(1.0, 0.8039, 0.5804));
-    body.setImTexture("./Texturas/poof.ppm");
-
-    // Sphere rightEye = Sphere(Point3D(-165.07, 90.46, -830.0), 60.55, ColorRGB(1.0, 0.6549, 0.8235));
-    // Sphere leftEye = Sphere(Point3D(-291.78, 95.54, -820.0), 65.16, ColorRGB(1.0, 0.6549, 0.8235));
+    body.setImTexture("./Texturas/poof-body.ppm");
 
     Sphere rightEye = Sphere(Point3D(-165.07, 90.46, -830.0), 60.55, ColorRGB(1.0, 1.0, 1.0));
     Sphere leftEye = Sphere(Point3D(-291.78, 95.54, -820.0), 65.16, ColorRGB(1.0, 1.0, 1.0));
@@ -34,17 +30,10 @@ int main()
     Sphere leftPupil = Sphere(Point3D(-239.15, 80.61, -725.0), 11.52, ColorRGB(0.0, 0.0, 0.0));
 
     Sphere ear = Sphere(Point3D(-422.57, 27.76, -725.0), 28.814, ColorRGB(0.7686, 0.6118, 0.4274));
-
+    ear.setImTexture("./Texturas/poof-ear.ppm");
     Triangle leftCrownTriangle = Triangle(Point3D(-457.81, 212.82, -800.0), Point3D(-441.6, 191.31, -800.0), Point3D(-416.36, 209.86, -800.0), ColorRGB(1.0, 0.8745, 0.0));
     Triangle middleCrownTriangle = Triangle(Point3D(-431.8, 233.17, -800.0), Point3D(-428.6, 200.81, -800.0), Point3D(-395.32, 225.26, -800.0), ColorRGB(1.0, 0.8745, 0.0));
     Triangle rightCrownTriangle = Triangle(Point3D(-392.47, 257.97, -800.0), Point3D(-403.74, 219.32, -800.0), Point3D(-375.85, 239.15, -800.0), ColorRGB(1.0, 0.8745, 0.0));
-
-    // Quadrilateral eyelashOne = Quadrilateral(Point3D(-388.24, 101.21, -800.0), Point3D(-359.65, 98.42, -800.0), Point3D(-356.56, 108.94, -800.0), Point3D(-385.92, 116.66, -800.0));
-    // eyelashOne.color = ColorRGB(0.0, 0.0, 0.0);
-    // Quadrilateral eyelashTwo = Quadrilateral(Point3D(-378.97, 131.34, -800.0), Point3D(-351.92, 123.62, -800.0), Point3D(-347.29, 131.34, -800.0), Point3D(-370.47, 145.25, -800.0));
-    // eyelashTwo.color = ColorRGB(0.0, 0.0, 0.0);
-    // Quadrilateral eyelashThree = Quadrilateral(Point3D(-360.42, 156.07, -800), Point3D(-338.02, 142.93, -800.0), Point3D(-330.29, 149.88, -800.0), Point3D(-348.06, 169.2, -800.0));
-    // eyelashThree.color = ColorRGB(0.0, 0.0, 0.0);
 
     Quadrilateral eyelashOne = Quadrilateral(Point3D(-353.76, 118.48, -800.0), Point3D(-351.15, 123.7, -800.0), Point3D(-377.24, 139.35, -800.0), Point3D(-384.42, 126.31, -800.0));
     eyelashOne.color = ColorRGB(0.0, 0.0, 0.0);
@@ -68,9 +57,11 @@ int main()
     Sphere pacifier = Sphere(Point3D(-395.9, -264.4, -900.0), 29.5733, ColorRGB(0.8078, 0.5647, 0.6235));
     Sphere pacifierTop = Sphere(Point3D(-374.12, -284.94, -900.0), 8.34146, ColorRGB(0.8078, 0.5647, 0.6235));
 
-    Sphere handInBottle = Sphere(Point3D(-426.98, -186.18, -700.0), 39.1311, ColorRGB(1.0, 0.8039, 0.5804));
     Quadrilateral rightArm = Quadrilateral(Point3D(-402.43695, -157.37612, -600.0), Point3D(-407.77192, -68.81551, -600.0), Point3D(-453.65272, -48.5426, -600.0), Point3D(-454.71971, -157.37612, -600.0), ColorRGB(0.7569, 0.5843, 0.8941));
     Sphere leftHand = Sphere(Point3D(-104.28, -158.52, -1300.0), 38.51, ColorRGB(1.0, 0.8039, 0.5804));
+    leftHand.setImTexture("./Texturas/poof-hand.ppm");
+    Sphere handInBottle = Sphere(Point3D(-426.98, -186.18, -700.0), 39.1311, ColorRGB(1.0, 0.8039, 0.5804));
+    handInBottle.setImTexture("./Texturas/poof-hand.ppm");
     Quadrilateral leftArm = Quadrilateral(Point3D(-88.93116, -59.13149, -1200.0), Point3D(-135.26087, -62.10503, -1200.0), Point3D(-139.0977, -135.964, -1200.0), Point3D(-74.83081, -135.964, -1200.0), ColorRGB(0.7569, 0.5843, 0.8941));
 
     Quadrilateral rightLeg = Quadrilateral(Point3D(-345.21, -221.07, -1000.0), Point3D(-300.0, -221.08, -1000.0), Point3D(-300.0, -161.08, -1000.0), Point3D(-345.54, -160.86, -1000.0), ColorRGB(0.7569, 0.5843, 0.8941));
@@ -78,7 +69,7 @@ int main()
     Quadrilateral leftLeg = Quadrilateral(Point3D(-244.04, -220.06, -1000.0), Point3D(-198.78, -220.21, -1000.0), Point3D(-198.73, -160.27, -1000.0), Point3D(-244.04, -159.77, -1000.0), ColorRGB(0.7569, 0.5843, 0.8941));
     Sphere leftFoot = Sphere(Point3D(-220.67, -222.72, -1100.0), 22.5, ColorRGB(1.0, 1.0, 1.0));
 
-    Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.18, 0.2274, 0.1333));
+    Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.7529, 0.7333, 0.7176));
 
     scene.push_back(&body);
     scene.push_back(&rightEye);

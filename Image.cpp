@@ -58,7 +58,7 @@ void Image::read_ppm_file(const char *file_name)
 
 	if (file == 0)
 	{
-		cout << "could not open file" << endl;
+		cout << "could not open file " << file_name << endl;
 	}
 
 	// PPM header
