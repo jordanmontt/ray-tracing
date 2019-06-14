@@ -3,6 +3,7 @@
 #include "Vector3D.h"
 #include "Point3D.h"
 #include "GeometricObject.h"
+#include "ImTexture.h"
 
 class Triangle : public GeometricObject
 {
@@ -12,6 +13,10 @@ public:
   Point3D C;
   ColorRGB color;
 
+  ImTexture *im;
+  Image m;
+  SphereMap sm;
+
 public:
   Triangle();
   Triangle(Point3D a, Point3D b, Point3D c);
@@ -20,5 +25,6 @@ public:
   void setColor(double red, double green, double blue);
   ColorRGB getColor(Point3D);
   void setHasShadow(bool shadow);
+  void setImTexture(string path);
 };
 #endif

@@ -122,7 +122,7 @@ void Image::read_ppm_file(const char *file_name)
 
 			if (fscanf(file, "%c%c%c", &red, &green, &blue) != 3)
 			{
-				cout << "Invalid image" << endl;
+				cout << "Invalid image " << file_name << endl;
 			}
 
 			float r = red * inv_max_value;

@@ -1,10 +1,23 @@
 #include "Triangle.h"
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
 
-Triangle::Triangle() : GeometricObject() {}
+Triangle::Triangle() : GeometricObject()
+{
+    this->im = NULL;
+}
 
-Triangle::Triangle(Point3D a, Point3D b, Point3D c) : A(a), B(b), C(c) {}
+Triangle::Triangle(Point3D a, Point3D b, Point3D c) : A(a), B(b), C(c)
+{
+    this->im = NULL;
+}
 
-Triangle::Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color) : A(a), B(b), C(c), color(color) {}
+Triangle::Triangle(Point3D a, Point3D b, Point3D c, ColorRGB color) : A(a), B(b), C(c), color(color)
+{
+    this->im = NULL;
+}
 
 bool Triangle::isImpact(const Ray &ray, double &tmin, Vector3D &normal, Point3D &pointQ) const
 {
@@ -51,6 +64,10 @@ void Triangle::setColor(double red, double green, double blue)
 
 ColorRGB Triangle::getColor(Point3D hitPoint)
 {
+    if (this->im != NULL)
+    {
+        return im->get_color(hitPoint);
+    }
     ColorRGB c;
     c.red = this->color.red;
     c.green = this->color.green;
@@ -61,4 +78,14 @@ ColorRGB Triangle::getColor(Point3D hitPoint)
 void Triangle::setHasShadow(bool shadow)
 {
     this->hasShadow = shadow;
+}
+
+void Triangle::setImTexture(string path)
+{
+    char charArray[path.length() + 1];
+    strcpy(charArray, path.c_str());
+    im = new ImTexture();
+    m.read_ppm_file(charArray);
+    im->set_image(&m);
+    im->set_SphereMap(&sm);
 }
