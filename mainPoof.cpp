@@ -76,7 +76,7 @@ int main()
     Sphere leftFoot = Sphere(Point3D(-220.67, -222.72, -1100.0), 22.5, ColorRGB(1.0, 1.0, 1.0));
 
     Triangle faso = Triangle(Point3D(-67.25, 67.67, -800), Point3D(-266.4, -28.94, -800), Point3D(-55.78, 43.68, -800), ColorRGB(0.7529, 0.7333, 0.7176));
-    faso.setImTexture("./Texturas/porrazo.ppm");
+    // faso.setImTexture("./Texturas/porrazo.ppm");
 
     //FOOP
     Quadrilateral FoopBodyUp = Quadrilateral(Point3D(30.0, 141.0, -1000.0), Point3D(72.0, -89.0, -1000.0), Point3D(332.0, -69.0, -1000.0), Point3D(315.0, 188.0, -1000.0), ColorRGB(0.2784, 0.5923, 0.8392));
@@ -121,6 +121,7 @@ int main()
     Quadrilateral FoopLegRight = Quadrilateral(Point3D(291.0, -140.0, -1100.0), Point3D(269.0, -182.0, -1100.0), Point3D(323.0, -220.0, -1100.0), Point3D(344.0, -178.0, -1100.0), ColorRGB(0.1255, 0.2745, 0.4112));
 
     Sphere FoopHandLeft = Sphere(Point3D(41.99, -105.95, -1200), 30.987, ColorRGB(0.3019, 0.6196, 0.8784));
+    FoopHandLeft.setImTexture("./Texturas/foop-left-hand.ppm");
     Sphere FoopHandRight = Sphere(Point3D(503.73, -59.48, -1200), 30.987, ColorRGB(0.3019, 0.6196, 0.8784));
     FoopHandRight.setImTexture("./Texturas/foop-right-hand.ppm");
 
@@ -128,37 +129,37 @@ int main()
     Sphere FoopFootRight = Sphere(Point3D(345.19, -204.87, -1200), 26.089, ColorRGB(0.5215, 0.6980, 0.8510));
 
     //SCENE
-    // scene.push_back(&body);
-    // scene.push_back(&rightEye);
-    // scene.push_back(&leftEye);
-    // scene.push_back(&leftIris);
-    // scene.push_back(&rightIris);
-    // scene.push_back(&rightPupil);
-    // scene.push_back(&leftPupil);
-    // scene.push_back(&ear);
-    // // scene.push_back(&faso);
-    // scene.push_back(&eyelashOne);
-    // scene.push_back(&eyelashTwo);
-    // scene.push_back(&eyelashThree);
-    // scene.push_back(&upperRightEyelash);
-    // scene.push_back(&middleRightEyelash);
-    // scene.push_back(&lowerRightEyelash);
-    // scene.push_back(&leftCrownTriangle);
-    // scene.push_back(&middleCrownTriangle);
-    // scene.push_back(&rightCrownTriangle);
-    // scene.push_back(&bottle);
-    // scene.push_back(&bottleCap);
-    // scene.push_back(&pacifier);
-    // scene.push_back(&pacifierTop);
-    // scene.push_back(&handInBottle);
-    // scene.push_back(&rightArm);
-    // scene.push_back(&leftHand);
-    // scene.push_back(&leftArm);
-    // scene.push_back(&rightLeg);
-    // scene.push_back(&rightFoot);
-    // scene.push_back(&leftLeg);
-    // scene.push_back(&leftFoot);
-    //FOOP
+    scene.push_back(&body);
+    scene.push_back(&rightEye);
+    scene.push_back(&leftEye);
+    scene.push_back(&leftIris);
+    scene.push_back(&rightIris);
+    scene.push_back(&rightPupil);
+    scene.push_back(&leftPupil);
+    scene.push_back(&ear);
+    // scene.push_back(&faso);
+    scene.push_back(&eyelashOne);
+    scene.push_back(&eyelashTwo);
+    scene.push_back(&eyelashThree);
+    scene.push_back(&upperRightEyelash);
+    scene.push_back(&middleRightEyelash);
+    scene.push_back(&lowerRightEyelash);
+    scene.push_back(&leftCrownTriangle);
+    scene.push_back(&middleCrownTriangle);
+    scene.push_back(&rightCrownTriangle);
+    scene.push_back(&bottle);
+    scene.push_back(&bottleCap);
+    scene.push_back(&pacifier);
+    scene.push_back(&pacifierTop);
+    scene.push_back(&handInBottle);
+    scene.push_back(&rightArm);
+    scene.push_back(&leftHand);
+    scene.push_back(&leftArm);
+    scene.push_back(&rightLeg);
+    scene.push_back(&rightFoot);
+    scene.push_back(&leftLeg);
+    scene.push_back(&leftFoot);
+    // FOOP
     scene.push_back(&FoopBodyUp);
     scene.push_back(&FoopBodyDownLeft);
     scene.push_back(&FoopBodyDownCenter);
